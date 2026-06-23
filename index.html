@@ -1,1 +1,117 @@
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Generador de Banners</title>
+    
+    <!-- Librerías -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Generador de Banners</h1>
+        <p>Carga los datos de la oferta y genera todos los banners automáticamente</p>
+        
+        <!-- FORMULARIO -->
+        <div class="formulario">
+            <h2>📝 Datos de la oferta</h2>
+            
+            <div class="grid-2">
+                <div class="campo">
+                    <label>Seleccionar banner:</label>
+                    <select id="selectorBanner">
+                        <option value="todas">📦 Todas las medidas</option>
+                        <option value="banner_160x600">📐 160x600 (Vertical)</option>
+                        <option value="banner_300x250_oferta1">📐 300x250 - Oferta 1</option>
+                        <option value="banner_300x250_oferta2">📐 300x250 - Oferta 2</option>
+                        <option value="banner_970x250_oferta1">📐 970x250 - Oferta 1</option>
+                        <option value="banner_970x250_oferta2">📐 970x250 - Oferta 2</option>
+                    </select>
+                </div>
+                
+                <div class="campo">
+                    <label>Tipo de oferta:</label>
+                    <select id="tipoOferta">
+                        <option value="1">Oferta 1</option>
+                        <option value="2">Oferta 2</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="grid-2">
+                <div class="campo">
+                    <label>Vigencia:</label>
+                    <input type="text" id="vigencia" placeholder="Ej: 15 MAY AL 20 MAY" value="15 MAY AL 20 MAY">
+                </div>
+                
+                <div class="campo">
+                    <label>Logo de la oferta:</label>
+                    <select id="logoOferta">
+                        <option value="imagenes/logo_oferta_1.png">Logo Oferta 1</option>
+                        <option value="imagenes/logo_oferta_2.png">Logo Oferta 2</option>
+                    </select>
+                </div>
+            </div>
+            
+            <h3>Oferta 1</h3>
+            <div class="grid-3">
+                <div class="campo">
+                    <label>Descuento 1:</label>
+                    <input type="text" id="descuento_1" placeholder="Ej: 30%" value="30%">
+                </div>
+                <div class="campo">
+                    <label>Cencopay 1:</label>
+                    <input type="text" id="cencopay_1" placeholder="Ej: 15%" value="15%">
+                </div>
+                <div class="campo">
+                    <label>Dinámica 1:</label>
+                    <input type="text" id="dinamica_1" placeholder="Ej: 2x1" value="2x1">
+                </div>
+            </div>
+            <div class="campo">
+                <label>Productos 1:</label>
+                <input type="text" id="productos_1" placeholder="Ej: Vinos y espumantes" value="Vinos y espumantes">
+            </div>
+            
+            <h3>Oferta 2</h3>
+            <div class="grid-3">
+                <div class="campo">
+                    <label>Descuento 2:</label>
+                    <input type="text" id="descuento_2" placeholder="Ej: 20%" value="20%">
+                </div>
+                <div class="campo">
+                    <label>Cencopay 2:</label>
+                    <input type="text" id="cencopay_2" placeholder="Ej: 10%" value="10%">
+                </div>
+                <div class="campo">
+                    <label>Dinámica 2:</label>
+                    <input type="text" id="dinamica_2" placeholder="Ej: 3x2" value="3x2">
+                </div>
+            </div>
+            <div class="campo">
+                <label>Productos 2:</label>
+                <input type="text" id="productos_2" placeholder="Ej: Leches saborizadas" value="Leches saborizadas">
+            </div>
+            
+            <div class="campo">
+                <label>Legales:</label>
+                <input type="text" id="legales" placeholder="Ej: Términos y condiciones" value="Términos y condiciones aplican">
+            </div>
+            
+            <button id="btnGenerar">🚀 Generar Banners</button>
+        </div>
+        
+        <!-- RESULTADOS -->
+        <div id="resultados" style="display:none;">
+            <h2>✅ Banners generados</h2>
+            <div id="contenedorBanners"></div>
+            <button id="btnDescargarTodos">📥 Descargar todos en lote</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
