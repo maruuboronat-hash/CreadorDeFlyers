@@ -1,5 +1,5 @@
 // ============================================================
-// GENERADOR DE BANNERS - VERSIÓN ESTABLE
+// GENERADOR DE BANNERS - RUTAS CORREGIDAS
 // ============================================================
 
 console.log("🚀 script.js cargado");
@@ -15,14 +15,16 @@ function generarOferta(numero) {
     const productos = `productos_${numero}`;
 
     return [
+        // TICKET
         {
             id: `ticket_${numero}`,
             type: "decorative",
-            source: "imagenes/ticket-base0.svg",
-            position: { type: "relative", align: "center", marginTop: 8 },
+            source: "imagenes/ticket.svg",
+            position: { type: "relative", align: "center", marginTop: 5 },
             size: { width: 130, height: 77 },
             zIndex: 1
         },
+        // DESCUENTO (sobre el ticket)
         {
             id: `descuento_${numero}`,
             type: "text",
@@ -33,13 +35,15 @@ function generarOferta(numero) {
             textShadow: "0 2px 4px rgba(0,0,0,0.3)",
             align: "center"
         },
+        // BASE DE CENCOPAY
         {
             id: `cencopay_base_${numero}`,
             type: "decorative",
-            source: "imagenes/base-texto0.svg",
+            source: "imagenes/cencopay_base.svg",
             position: { type: "relative", after: `ticket_${numero}`, marginTop: 2, align: "center" },
             size: { width: 76, height: 15 }
         },
+        // CRÉDITO (sobre la base)
         {
             id: `cencopay_credito_${numero}`,
             type: "text",
@@ -49,30 +53,26 @@ function generarOferta(numero) {
             zIndex: 2,
             align: "left"
         },
-        {
-            id: `cencopay_${numero}`,
-            type: "decorative",
-            source: "imagenes/cencopay0.svg",
-            position: { type: "relative", after: `cencopay_base_${numero}`, marginTop: 1, align: "center" },
-            size: { width: 57, height: 13 }
-        },
+        // PORCENTAJE (sobre Cencopay)
         {
             id: `cencopay_porcentaje_${numero}`,
             type: "text",
             content: `{{${cencopay}}}`,
-            position: { type: "over", target: `cencopay_${numero}`, offsetY: -2 },
+            position: { type: "over", target: `cencopay_base_${numero}`, offsetX: 0, offsetY: 2 },
             typography: { fontSize: 11.6, color: "#0500b2", bold: true },
             zIndex: 2,
             align: "center"
         },
+        // DINÁMICA
         {
             id: `dinamica_${numero}`,
             type: "text",
             content: `{{${dinamica}}}`,
-            position: { type: "relative", after: `cencopay_${numero}`, marginTop: 3 },
+            position: { type: "relative", after: `cencopay_base_${numero}`, marginTop: 3 },
             typography: { fontSize: 20, color: "#ffffff", bold: true },
             align: "center"
         },
+        // PRODUCTOS
         {
             id: `productos_${numero}`,
             type: "text",
@@ -98,12 +98,13 @@ const banners = {
         background: "#003820",
         layout: { type: "vertical", padding: 0, gap: 0 },
         elementos: [
+            // CABEZAL
             {
                 id: "cabezal",
                 type: "group",
                 position: "top",
                 height: 90,
-                background: "url('imagenes/rectangle0.png')",
+                background: "url('imagenes/fondo_cabezal.svg')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 elements: [
@@ -111,15 +112,15 @@ const banners = {
                         id: "logo_oferta",
                         type: "image",
                         source: "{{logo_oferta}}",
-                        position: { type: "fixed", align: "top", marginTop: 10 },
-                        size: { height: 35, width: "auto" },
+                        position: { type: "fixed", align: "top", marginTop: 8 },
+                        size: { height: 30, width: "auto" },
                         align: "center"
                     },
                     {
                         id: "vigencia_dia_1",
                         type: "text",
                         content: "{{vigencia_dia_1}}",
-                        position: { type: "fixed", align: "left", marginLeft: 12, marginTop: 36 },
+                        position: { type: "fixed", align: "left", marginLeft: 10, marginTop: 32 },
                         typography: { fontSize: 8.4, color: "#ffffff" },
                         align: "left"
                     },
@@ -127,7 +128,7 @@ const banners = {
                         id: "vigencia_numero_1",
                         type: "text",
                         content: "{{vigencia_numero_1}}",
-                        position: { type: "fixed", align: "left", marginLeft: 10, marginTop: 44 },
+                        position: { type: "fixed", align: "left", marginLeft: 8, marginTop: 42 },
                         typography: { fontSize: 22.5, color: "#ffffff", bold: true },
                         align: "left"
                     },
@@ -135,7 +136,7 @@ const banners = {
                         id: "vigencia_mes_1",
                         type: "text",
                         content: "{{vigencia_mes_1}}",
-                        position: { type: "fixed", align: "left", marginLeft: 12, marginTop: 58 },
+                        position: { type: "fixed", align: "left", marginLeft: 10, marginTop: 56 },
                         typography: { fontSize: 7.0, color: "#ffffff" },
                         align: "left"
                     },
@@ -143,7 +144,7 @@ const banners = {
                         id: "vigencia_al",
                         type: "text",
                         content: "AL",
-                        position: { type: "fixed", align: "left", marginLeft: 45, marginTop: 52 },
+                        position: { type: "fixed", align: "left", marginLeft: 42, marginTop: 50 },
                         typography: { fontSize: 6.5, color: "#ffffff", bold: true },
                         align: "left"
                     },
@@ -151,7 +152,7 @@ const banners = {
                         id: "vigencia_dia_2",
                         type: "text",
                         content: "{{vigencia_dia_2}}",
-                        position: { type: "fixed", align: "left", marginLeft: 58, marginTop: 36 },
+                        position: { type: "fixed", align: "left", marginLeft: 56, marginTop: 32 },
                         typography: { fontSize: 8.4, color: "#ffffff" },
                         align: "left"
                     },
@@ -159,7 +160,7 @@ const banners = {
                         id: "vigencia_numero_2",
                         type: "text",
                         content: "{{vigencia_numero_2}}",
-                        position: { type: "fixed", align: "left", marginLeft: 60, marginTop: 44 },
+                        position: { type: "fixed", align: "left", marginLeft: 58, marginTop: 42 },
                         typography: { fontSize: 22.5, color: "#ffffff", bold: true },
                         align: "left"
                     },
@@ -167,28 +168,30 @@ const banners = {
                         id: "vigencia_mes_2",
                         type: "text",
                         content: "{{vigencia_mes_2}}",
-                        position: { type: "fixed", align: "left", marginLeft: 58, marginTop: 58 },
+                        position: { type: "fixed", align: "left", marginLeft: 56, marginTop: 56 },
                         typography: { fontSize: 7.0, color: "#ffffff" },
                         align: "left"
                     },
                     {
                         id: "logo_jumbo",
                         type: "image",
-                        source: "imagenes/logo_jumbo.png",
-                        position: { type: "fixed", align: "right", marginRight: 5, marginTop: 5 },
-                        size: { height: 25, width: "auto" }
+                        source: "imagenes/logo_jumbo.svg",
+                        position: { type: "fixed", align: "right", marginRight: 4, marginTop: 4 },
+                        size: { height: 22, width: "auto" }
                     }
                 ]
             },
+            // OFERTA 1
             {
                 id: "oferta_1",
                 type: "group",
                 position: "after:cabezal",
                 background: "#2e7d32",
-                padding: 8,
+                padding: 6,
                 flex: 1,
                 elements: generarOferta("1")
             },
+            // SEPARADOR
             {
                 id: "separador",
                 type: "decorative",
@@ -196,28 +199,31 @@ const banners = {
                 height: 1,
                 background: "#ffffff"
             },
+            // OFERTA 2
             {
                 id: "oferta_2",
                 type: "group",
                 position: "after:separador",
                 background: "#2e7d32",
-                padding: 8,
+                padding: 6,
                 flex: 1,
                 elements: generarOferta("2")
             },
+            // LÍNEA SUPERIOR
             {
                 id: "linea_superior",
                 type: "decorative",
                 position: "after:oferta_2",
                 height: 1,
                 background: "#ffffff",
-                marginTop: 3
+                marginTop: 2
             },
+            // TEXTO INFORMATIVO
             {
                 id: "texto_informativo",
                 type: "group",
                 position: "after:linea_superior",
-                padding: 4,
+                padding: 3,
                 background: "transparent",
                 elements: [
                     {
@@ -228,38 +234,32 @@ const banners = {
                         align: "center"
                     },
                     {
-                        id: "imagen_acompanante",
-                        type: "image",
-                        source: "imagenes/group0.svg",
-                        position: { type: "relative", after: "texto_informativo_contenido", marginTop: 2 },
-                        size: { height: 13, width: "auto" },
-                        align: "center"
-                    },
-                    {
                         id: "com_ar",
                         type: "text",
                         content: ".com.ar",
-                        position: { type: "relative", after: "imagen_acompanante", marginTop: 2 },
+                        position: { type: "relative", after: "texto_informativo_contenido", marginTop: 2 },
                         typography: { fontSize: 4.0, color: "#ffffff", bold: true },
                         align: "center"
                     }
                 ]
             },
+            // LÍNEA INFERIOR
             {
                 id: "linea_inferior",
                 type: "decorative",
                 position: "after:texto_informativo",
                 height: 1,
                 background: "#ffffff",
-                marginBottom: 3
+                marginBottom: 2
             },
+            // LEGALES
             {
                 id: "legales",
                 type: "text",
                 content: "{{legales}}",
                 position: "bottom",
-                padding: 4,
-                typography: { fontSize: 7, color: "#ffffff" },
+                padding: 3,
+                typography: { fontSize: 6.5, color: "#ffffff" },
                 align: "center",
                 maxLines: 2
             }
@@ -303,6 +303,7 @@ function renderizarBanner(datos, reglas) {
                 ${textShadow !== "none" ? `text-shadow: ${textShadow};` : ''}
                 padding: ${el.padding || 0}px;
                 width: 100%;
+                line-height: 1.2;
             `;
 
             html += `<div style="${estiloTexto}">${contenido}</div>`;
@@ -347,7 +348,7 @@ function renderizarBanner(datos, reglas) {
     }
 
     const padding = reglas.layout?.padding || 0;
-    const gap = reglas.layout?.gap || 0;
+    const gap = regras.layout?.gap || 0;
     const direction = reglas.layout?.type === "horizontal" ? "row" : "column";
 
     let html = `
@@ -386,14 +387,14 @@ function generarBanners() {
         vigencia_dia_2: document.getElementById('vigencia_dia_2').value || "domingo",
         vigencia_numero_2: document.getElementById('vigencia_numero_2').value || "21",
         vigencia_mes_2: document.getElementById('vigencia_mes_2').value || "junio",
-        logo_oferta: document.getElementById('logoOferta').value || "imagenes/logo0.svg",
+        logo_oferta: document.getElementById('logoOferta').value || "imagenes/logo_oferta.svg",
         descuento_1: document.getElementById('descuento_1').value || "30%",
         cencopay_1: document.getElementById('cencopay_1').value || "15%",
-        dinamica_1: document.getElementById('dinamica_1').value || "3x2",
+        dinamica_1: document.getElementById('dinamica_1').value || "2x1",
         productos_1: document.getElementById('productos_1').value || "VINOS Y ESPUMANTES*",
         descuento_2: document.getElementById('descuento_2').value || "20%",
         cencopay_2: document.getElementById('cencopay_2').value || "10%",
-        dinamica_2: document.getElementById('dinamica_2').value || "4x2",
+        dinamica_2: document.getElementById('dinamica_2').value || "3x2",
         productos_2: document.getElementById('productos_2').value || "LECHES SABORIZADAS*",
         legales: document.getElementById('legales').value || "BEBER CON MODERACIÓN. PROHIBIDA LA VENTA DE BEBIDAS ALCOHÓLICAS A MENORES DE 18 AÑOS. VER EXCLUSIONES EN JUMBO.COM.AR"
     };
