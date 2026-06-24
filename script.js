@@ -3,7 +3,7 @@
 // ============================================================
 
 // ============================================================
-// 1. FUNCIONES PARA GENERAR OFERTAS
+// 1. FUNCIÓN PARA GENERAR OFERTAS
 // ============================================================
 
 function generarOferta(numero) {
@@ -16,34 +16,98 @@ function generarOferta(numero) {
         {
             id: `ticket_${numero}`,
             type: "decorative",
-            source: "imagenes/ticket.svg",
-            position: { type: "relative", align: "center", marginTop: 5 },
-            size: { width: 70, height: 55 },
+            source: "imagenes/ticket_base.svg",
+            position: {
+                type: "relative",
+                align: "center",
+                marginTop: 8
+            },
+            size: {
+                width: 130,
+                height: 77
+            },
             zIndex: 1
         },
         {
             id: `descuento_${numero}`,
             type: "text",
             content: `{{${descuento}}}`,
-            position: { type: "over", target: `ticket_${numero}`, offsetY: -2 },
-            typography: { fontSize: 28, color: "#ffffff", bold: true },
+            position: {
+                type: "over",
+                target: `ticket_${numero}`,
+                offsetY: -2
+            },
+            typography: {
+                fontSize: 60,
+                color: "#ffffff",
+                bold: true
+            },
             zIndex: 2,
             textShadow: "0 2px 4px rgba(0,0,0,0.3)",
             align: "center"
         },
         {
-            id: `cencopay_${numero}`,
+            id: `cencopay_base_${numero}`,
             type: "decorative",
-            source: "imagenes/cencopay_base.svg",
-            position: { type: "relative", after: `ticket_${numero}`, marginTop: 2, align: "center" },
-            size: { width: 60, height: 20 }
+            source: "imagenes/base_texto.svg",
+            position: {
+                type: "relative",
+                after: `ticket_${numero}`,
+                marginTop: 2,
+                align: "center"
+            },
+            size: {
+                width: 76,
+                height: 15
+            }
         },
         {
-            id: `cencopay_texto_${numero}`,
+            id: `cencopay_credito_${numero}`,
+            type: "text",
+            content: "CRÉDITO",
+            position: {
+                type: "over",
+                target: `cencopay_base_${numero}`,
+                offsetX: 22,
+                offsetY: 0
+            },
+            typography: {
+                fontSize: 7.9,
+                color: "#0500b2",
+                bold: true
+            },
+            zIndex: 2,
+            align: "left"
+        },
+        {
+            id: `cencopay_${numero}`,
+            type: "decorative",
+            source: "imagenes/cencopay.svg",
+            position: {
+                type: "relative",
+                after: `cencopay_base_${numero}`,
+                marginTop: 1,
+                align: "center"
+            },
+            size: {
+                width: 57,
+                height: 13
+            }
+        },
+        {
+            id: `cencopay_porcentaje_${numero}`,
             type: "text",
             content: `{{${cencopay}}}`,
-            position: { type: "over", target: `cencopay_${numero}`, offsetY: 0 },
-            typography: { fontSize: 11, color: "#ffffff", bold: true },
+            position: {
+                type: "over",
+                target: `cencopay_${numero}`,
+                offsetY: 0
+            },
+            typography: {
+                fontSize: 11.6,
+                color: "#0500b2",
+                bold: true
+            },
             zIndex: 2,
             align: "center"
         },
@@ -51,24 +115,40 @@ function generarOferta(numero) {
             id: `dinamica_${numero}`,
             type: "text",
             content: `{{${dinamica}}}`,
-            position: { type: "relative", after: `cencopay_${numero}`, marginTop: 2 },
-            typography: { fontSize: 9, color: "#ffffff" },
+            position: {
+                type: "relative",
+                after: `cencopay_${numero}`,
+                marginTop: 3
+            },
+            typography: {
+                fontSize: 20,
+                color: "#ffffff",
+                bold: true
+            },
             align: "center"
         },
         {
             id: `productos_${numero}`,
             type: "text",
             content: `{{${productos}}}`,
-            position: { type: "relative", after: `dinamica_${numero}`, marginTop: 3 },
-            typography: { fontSize: 8, color: "#ffffff" },
+            position: {
+                type: "relative",
+                after: `dinamica_${numero}`,
+                marginTop: 2
+            },
+            typography: {
+                fontSize: 20,
+                color: "#ffffff",
+                bold: true
+            },
             align: "center",
-            maxLines: 3
+            maxLines: 2
         }
     ];
 }
 
 // ============================================================
-// 2. DEFINICIÓN DE BANNER (Solo 160x600 por ahora)
+// 2. DEFINICIÓN DE BANNERS
 // ============================================================
 
 const banners = {
@@ -77,43 +157,171 @@ const banners = {
         nombre: "160x600 - Vertical",
         width: 160,
         height: 600,
-        background: "#ffffff",
-        layout: { type: "vertical", padding: 0, gap: 0 },
+        background: "#003820",
+        layout: {
+            type: "vertical",
+            padding: 0,
+            gap: 0
+        },
         elementos: [
-            // Cabezal
+            // CABEZAL
             {
                 id: "cabezal",
                 type: "group",
                 position: "top",
-                height: 80,
+                height: 90,
                 background: "url('imagenes/fondo_cabezal.jpg')",
                 backgroundSize: "cover",
+                backgroundPosition: "center",
                 elements: [
                     {
                         id: "logo_oferta",
                         type: "image",
                         source: "{{logo_oferta}}",
-                        position: { type: "fixed", align: "top", marginTop: 8, marginLeft: "center" },
-                        size: { height: 30, width: "auto" }
+                        position: {
+                            type: "fixed",
+                            align: "top",
+                            marginTop: 10
+                        },
+                        size: {
+                            height: 35,
+                            width: "auto"
+                        },
+                        align: "center"
                     },
                     {
-                        id: "vigencia",
+                        id: "vigencia_dia_1",
                         type: "text",
-                        content: "{{vigencia}}",
-                        position: { type: "fixed", align: "bottom", marginBottom: 5 },
-                        typography: { fontSize: 8, color: "#ffffff", bold: true },
-                        align: "center"
+                        content: "{{vigencia_dia_1}}",
+                        position: {
+                            type: "fixed",
+                            align: "left",
+                            marginLeft: 12,
+                            marginTop: 36
+                        },
+                        typography: {
+                            fontSize: 8.4,
+                            color: "#ffffff"
+                        },
+                        align: "left"
+                    },
+                    {
+                        id: "vigencia_numero_1",
+                        type: "text",
+                        content: "{{vigencia_numero_1}}",
+                        position: {
+                            type: "fixed",
+                            align: "left",
+                            marginLeft: 10,
+                            marginTop: 44
+                        },
+                        typography: {
+                            fontSize: 22.5,
+                            color: "#ffffff",
+                            bold: true
+                        },
+                        align: "left"
+                    },
+                    {
+                        id: "vigencia_mes_1",
+                        type: "text",
+                        content: "{{vigencia_mes_1}}",
+                        position: {
+                            type: "fixed",
+                            align: "left",
+                            marginLeft: 12,
+                            marginTop: 58
+                        },
+                        typography: {
+                            fontSize: 7.0,
+                            color: "#ffffff"
+                        },
+                        align: "left"
+                    },
+                    {
+                        id: "vigencia_al",
+                        type: "text",
+                        content: "AL",
+                        position: {
+                            type: "fixed",
+                            align: "left",
+                            marginLeft: 45,
+                            marginTop: 52
+                        },
+                        typography: {
+                            fontSize: 6.5,
+                            color: "#ffffff",
+                            bold: true
+                        },
+                        align: "left"
+                    },
+                    {
+                        id: "vigencia_dia_2",
+                        type: "text",
+                        content: "{{vigencia_dia_2}}",
+                        position: {
+                            type: "fixed",
+                            align: "left",
+                            marginLeft: 58,
+                            marginTop: 36
+                        },
+                        typography: {
+                            fontSize: 8.4,
+                            color: "#ffffff"
+                        },
+                        align: "left"
+                    },
+                    {
+                        id: "vigencia_numero_2",
+                        type: "text",
+                        content: "{{vigencia_numero_2}}",
+                        position: {
+                            type: "fixed",
+                            align: "left",
+                            marginLeft: 60,
+                            marginTop: 44
+                        },
+                        typography: {
+                            fontSize: 22.5,
+                            color: "#ffffff",
+                            bold: true
+                        },
+                        align: "left"
+                    },
+                    {
+                        id: "vigencia_mes_2",
+                        type: "text",
+                        content: "{{vigencia_mes_2}}",
+                        position: {
+                            type: "fixed",
+                            align: "left",
+                            marginLeft: 58,
+                            marginTop: 58
+                        },
+                        typography: {
+                            fontSize: 7.0,
+                            color: "#ffffff"
+                        },
+                        align: "left"
                     },
                     {
                         id: "logo_jumbo",
                         type: "image",
                         source: "imagenes/logo_jumbo.png",
-                        position: { type: "fixed", align: "right", marginRight: 5, marginTop: 5 },
-                        size: { height: 25, width: "auto" }
+                        position: {
+                            type: "fixed",
+                            align: "right",
+                            marginRight: 5,
+                            marginTop: 5
+                        },
+                        size: {
+                            height: 25,
+                            width: "auto"
+                        }
                     }
                 ]
             },
-            // Oferta 1
+            // OFERTA 1
             {
                 id: "oferta_1",
                 type: "group",
@@ -121,17 +329,17 @@ const banners = {
                 background: "#2e7d32",
                 padding: 8,
                 flex: 1,
-                elements: generarOferta(1)
+                elements: generarOferta("1")
             },
-            // Separador
+            // SEPARADOR
             {
                 id: "separador",
                 type: "decorative",
                 position: "after:oferta_1",
-                height: 2,
+                height: 1,
                 background: "#ffffff"
             },
-            // Oferta 2
+            // OFERTA 2
             {
                 id: "oferta_2",
                 type: "group",
@@ -139,59 +347,89 @@ const banners = {
                 background: "#2e7d32",
                 padding: 8,
                 flex: 1,
-                elements: generarOferta(2)
+                elements: generarOferta("2")
             },
-            // Línea superior
+            // LÍNEA SUPERIOR
             {
                 id: "linea_superior",
                 type: "decorative",
                 position: "after:oferta_2",
                 height: 1,
                 background: "#ffffff",
-                marginTop: 5
+                marginTop: 3
             },
-            // Texto informativo
+            // TEXTO INFORMATIVO
             {
                 id: "texto_informativo",
                 type: "group",
                 position: "after:linea_superior",
-                padding: 5,
-                background: "#f5f5f5",
+                padding: 4,
+                background: "transparent",
                 elements: [
                     {
                         id: "texto_informativo_contenido",
                         type: "text",
                         content: "ENCONTRÁ ESTAS Y OTRAS OFERTAS TAMBIÉN EN",
-                        typography: { fontSize: 7, color: "#333333", bold: true },
+                        typography: {
+                            fontSize: 5.5,
+                            color: "#ffffff",
+                            bold: true
+                        },
                         align: "center"
                     },
                     {
                         id: "imagen_acompanante",
                         type: "image",
-                        source: "imagenes/texto_acompañante.png",
-                        position: { type: "relative", after: "texto_informativo_contenido", marginTop: 2 },
-                        size: { height: 15, width: "auto" },
+                        source: "imagenes/icono_acompanante.svg",
+                        position: {
+                            type: "relative",
+                            after: "texto_informativo_contenido",
+                            marginTop: 2
+                        },
+                        size: {
+                            height: 13,
+                            width: "auto"
+                        },
+                        align: "center"
+                    },
+                    {
+                        id: "com_ar",
+                        type: "text",
+                        content: ".com.ar",
+                        position: {
+                            type: "relative",
+                            after: "imagen_acompanante",
+                            marginTop: 2
+                        },
+                        typography: {
+                            fontSize: 4.0,
+                            color: "#ffffff",
+                            bold: true
+                        },
                         align: "center"
                     }
                 ]
             },
-            // Línea inferior
+            // LÍNEA INFERIOR
             {
                 id: "linea_inferior",
                 type: "decorative",
                 position: "after:texto_informativo",
                 height: 1,
                 background: "#ffffff",
-                marginBottom: 5
+                marginBottom: 3
             },
-            // Legales
+            // LEGALES
             {
                 id: "legales",
                 type: "text",
                 content: "{{legales}}",
                 position: "bottom",
-                padding: 5,
-                typography: { fontSize: 6, color: "#666666" },
+                padding: 4,
+                typography: {
+                    fontSize: 7,
+                    color: "#ffffff"
+                },
                 align: "center",
                 maxLines: 2
             }
@@ -310,17 +548,27 @@ function renderizarBanner(datos, reglas) {
 
 function generarBanners() {
     const datos = {
-        vigencia: document.getElementById('vigencia').value || "15 MAY AL 20 MAY",
-        logo_oferta: document.getElementById('logoOferta').value || "imagenes/logo_oferta_1.png",
+        // Vigencia
+        vigencia_dia_1: document.getElementById('vigencia_dia_1').value || "viernes",
+        vigencia_numero_1: document.getElementById('vigencia_numero_1').value || "19",
+        vigencia_mes_1: document.getElementById('vigencia_mes_1').value || "junio",
+        vigencia_dia_2: document.getElementById('vigencia_dia_2').value || "domingo",
+        vigencia_numero_2: document.getElementById('vigencia_numero_2').value || "21",
+        vigencia_mes_2: document.getElementById('vigencia_mes_2').value || "junio",
+        // Logo
+        logo_oferta: document.getElementById('logoOferta').value || "imagenes/logo_oferta.svg",
+        // Oferta 1
         descuento_1: document.getElementById('descuento_1').value || "30%",
         cencopay_1: document.getElementById('cencopay_1').value || "15%",
-        dinamica_1: document.getElementById('dinamica_1').value || "2x1",
-        productos_1: document.getElementById('productos_1').value || "Vinos y espumantes",
+        dinamica_1: document.getElementById('dinamica_1').value || "3x2",
+        productos_1: document.getElementById('productos_1').value || "VINOS Y ESPUMANTES*",
+        // Oferta 2
         descuento_2: document.getElementById('descuento_2').value || "20%",
         cencopay_2: document.getElementById('cencopay_2').value || "10%",
-        dinamica_2: document.getElementById('dinamica_2').value || "3x2",
-        productos_2: document.getElementById('productos_2').value || "Leches saborizadas",
-        legales: document.getElementById('legales').value || "Términos y condiciones aplican"
+        dinamica_2: document.getElementById('dinamica_2').value || "4x2",
+        productos_2: document.getElementById('productos_2').value || "LECHES SABORIZADAS*",
+        // Legales
+        legales: document.getElementById('legales').value || "BEBER CON MODERACIÓN. PROHIBIDA LA VENTA DE BEBIDAS ALCOHÓLICAS A MENORES DE 18 AÑOS. VER EXCLUSIONES EN JUMBO.COM.AR"
     };
 
     const selector = document.getElementById('selectorBanner');
