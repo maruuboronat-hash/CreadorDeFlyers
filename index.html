@@ -31,10 +31,100 @@
                 <div class="campo">
                     <label>Logo de la oferta:</label>
                     <select id="logoOferta">
-                        <option value="imagenes/logo_oferta.svg">Logo Oferta</option>
+                        <option value="imagenes/logo0.svg">Logo Oferta</option>
                     </select>
                 </div>
             </div>
+            
+            <h3>📅 Vigencia</h3>
+            <div class="grid-3">
+                <div class="campo">
+                    <label>Día 1 (texto):</label>
+                    <input type="text" id="vigencia_dia_1" value="viernes">
+                </div>
+                <div class="campo">
+                    <label>Número 1:</label>
+                    <input type="text" id="vigencia_numero_1" value="19">
+                </div>
+                <div class="campo">
+                    <label>Mes 1:</label>
+                    <input type="text" id="vigencia_mes_1" value="junio">
+                </div>
+            </div>
+            <div class="grid-3">
+                <div class="campo">
+                    <label>Día 2 (texto):</label>
+                    <input type="text" id="vigencia_dia_2" value="domingo">
+                </div>
+                <div class="campo">
+                    <label>Número 2:</label>
+                    <input type="text" id="vigencia_numero_2" value="21">
+                </div>
+                <div class="campo">
+                    <label>Mes 2:</label>
+                    <input type="text" id="vigencia_mes_2" value="junio">
+                </div>
+            </div>
+            
+            <h3>🎯 Oferta 1</h3>
+            <div class="grid-3">
+                <div class="campo">
+                    <label>Descuento 1:</label>
+                    <input type="text" id="descuento_1" placeholder="Ej: 30%" value="30%">
+                </div>
+                <div class="campo">
+                    <label>Cencopay 1:</label>
+                    <input type="text" id="cencopay_1" placeholder="Ej: 15%" value="15%">
+                </div>
+                <div class="campo">
+                    <label>Dinámica 1:</label>
+                    <input type="text" id="dinamica_1" placeholder="Ej: 2x1" value="2x1">
+                </div>
+            </div>
+            <div class="campo">
+                <label>Productos 1:</label>
+                <input type="text" id="productos_1" placeholder="Ej: Vinos y espumantes" value="Vinos y espumantes">
+            </div>
+            
+            <h3>🎯 Oferta 2</h3>
+            <div class="grid-3">
+                <div class="campo">
+                    <label>Descuento 2:</label>
+                    <input type="text" id="descuento_2" placeholder="Ej: 20%" value="20%">
+                </div>
+                <div class="campo">
+                    <label>Cencopay 2:</label>
+                    <input type="text" id="cencopay_2" placeholder="Ej: 10%" value="10%">
+                </div>
+                <div class="campo">
+                    <label>Dinámica 2:</label>
+                    <input type="text" id="dinamica_2" placeholder="Ej: 3x2" value="3x2">
+                </div>
+            </div>
+            <div class="campo">
+                <label>Productos 2:</label>
+                <input type="text" id="productos_2" placeholder="Ej: Leches saborizadas" value="Leches saborizadas">
+            </div>
+            
+            <div class="campo">
+                <label>Legales:</label>
+                <input type="text" id="legales" placeholder="Ej: Términos y condiciones" value="Términos y condiciones aplican">
+            </div>
+            
+            <button id="btnGenerar">🚀 Generar Banners</button>
+        </div>
+        
+        <!-- RESULTADOS -->
+        <div id="resultados" style="display:none;">
+            <h2>✅ Banners generados</h2>
+            <div id="contenedorBanners"></div>
+            <button id="btnDescargarTodos">📥 Descargar todos en lote</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>            </div>
             
             <h3>📅 Vigencia</h3>
             <div class="grid-3">
