@@ -1,313 +1,531 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+// ============================================================
+// GENERADOR DE BANNERS - VERSIÓN CORREGIDA
+// ============================================================
+
+console.log("🚀 script.js cargado correctamente");
+
+// ============================================================
+// 1. FUNCIÓN PARA GENERAR OFERTAS
+// ============================================================
+
+function generarOferta(numero) {
+    const descuento = `descuento_${numero}`;
+    const cencopay = `cencopay_${numero}`;
+    const dinamica = `dinamica_${numero}`;
+    const productos = `productos_${numero}`;
+
+    return [
+        // TICKET
+        {
+            id: `ticket_${numero}`,
+            type: "decorative",
+            source: "imagenes/ticket-base0.svg",
+            position: { type: "relative", align: "center", marginTop: 8 },
+            size: { width: 130, height: 77 },
+            zIndex: 1
+        },
+        // DESCUENTO (sobre el ticket)
+        {
+            id: `descuento_${numero}`,
+            type: "text",
+            content: `{{${descuento}}}`,
+            position: { type: "over", target: `ticket_${numero}`, offsetY: -2 },
+            typography: { fontSize: 60, color: "#ffffff", bold: true },
+            zIndex: 2,
+            textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+            align: "center"
+        },
+        // BASE DE TEXTO (Cencopay)
+        {
+            id: `cencopay_base_${numero}`,
+            type: "decorative",
+            source: "imagenes/base-texto0.svg",
+            position: { type: "relative", after: `ticket_${numero}`, marginTop: 2, align: "center" },
+            size: { width: 76, height: 15 }
+        },
+        // CRÉDITO (sobre la base)
+        {
+            id: `cencopay_credito_${numero}`,
+            type: "text",
+            content: "CRÉDITO",
+            position: { type: "over", target: `cencopay_base_${numero}`, offsetX: 20, offsetY: -2 },
+            typography: { fontSize: 7.9, color: "#0500b2", bold: true },
+            zIndex: 2,
+            align: "left"
+        },
+        // CENCOPAY (imagen)
+        {
+            id: `cencopay_${numero}`,
+            type: "decorative",
+            source: "imagenes/cencopay0.svg",
+            position: { type: "relative", after: `cencopay_base_${numero}`, marginTop: 1, align: "center" },
+            size: { width: 57, height: 13 }
+        },
+        // PORCENTAJE (sobre Cencopay)
+        {
+            id: `cencopay_porcentaje_${numero}`,
+            type: "text",
+            content: `{{${cencopay}}}`,
+            position: { type: "over", target: `cencopay_${numero}`, offsetY: -2 },
+            typography: { fontSize: 11.6, color: "#0500b2", bold: true },
+            zIndex: 2,
+            align: "center"
+        },
+        // DINÁMICA
+        {
+            id: `dinamica_${numero}`,
+            type: "text",
+            content: `{{${dinamica}}}`,
+            position: { type: "relative", after: `cencopay_${numero}`, marginTop: 3 },
+            typography: { fontSize: 20, color: "#ffffff", bold: true },
+            align: "center"
+        },
+        // PRODUCTOS
+        {
+            id: `productos_${numero}`,
+            type: "text",
+            content: `{{${productos}}}`,
+            position: { type: "relative", after: `dinamica_${numero}`, marginTop: 2 },
+            typography: { fontSize: 20, color: "#ffffff", bold: true },
+            align: "center",
+            maxLines: 2
+        }
+    ];
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #f0f2f5;
-    padding: 20px;
-}
+// ============================================================
+// 2. DEFINICIÓN DEL BANNER 160x600
+// ============================================================
 
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-h1 {
-    color: #1a1a1a;
-    margin-bottom: 5px;
-}
-
-h2 {
-    color: #2e7d32;
-    margin: 20px 0 10px 0;
-}
-
-h3 {
-    color: #333;
-    margin: 15px 0 10px 0;
-    font-size: 16px;
-}
-
-.formulario {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
-}
-
-.grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.grid-3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 15px;
-}
-
-.campo {
-    margin-bottom: 15px;
-}
-
-.campo label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #333;
-    font-size: 14px;
-}
-
-.campo input, .campo select {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
-.campo input:focus, .campo select:focus {
-    border-color: #2e7d32;
-    outline: none;
-}
-
-button {
-    background: #2e7d32;
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-button:hover {
-    background: #1b5e20;
-}
-
-#btnDescargarTodos {
-    background: #1565c0;
-    margin-top: 20px;
-}
-
-#btnDescargarTodos:hover {
-    background: #0d47a1;
-}
-
-#resultados {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 2px solid #eee;
-}
-
-.banner-item {
-    margin: 20px 0;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-}
-
-.banner-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.banner-header strong {
-    font-size: 18px;
-    color: #1a1a1a;
-}
-
-.banner-header button {
-    padding: 8px 20px;
-    font-size: 14px;
-    background: #2e7d32;
-}
-
-.banner-header button:hover {
-    background: #1b5e20;
-}
-
-.banner-preview {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: white;
-    padding: 20px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    overflow: auto;
-    min-height: 100px;
-}
-
-.banner {
-    flex-shrink: 0;
-    border: 1px solid #e0e0e0;
-}
-
-hr {
-    margin: 20px 0 10px 0;
-    border: none;
-    border-top: 2px solid #e0e0e0;
-}
-
-@media (max-width: 768px) {
-    .grid-2, .grid-3 {
-        grid-template-columns: 1fr;
+const banners = {
+    "banner_160x600": {
+        id: "banner_160x600",
+        nombre: "160x600 - Vertical",
+        width: 160,
+        height: 600,
+        background: "#003820",
+        layout: { type: "vertical", padding: 0, gap: 0 },
+        elementos: [
+            // CABEZAL
+            {
+                id: "cabezal",
+                type: "group",
+                position: "top",
+                height: 90,
+                background: "url('imagenes/rectangle0.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                elements: [
+                    {
+                        id: "logo_oferta",
+                        type: "image",
+                        source: "{{logo_oferta}}",
+                        position: { type: "fixed", align: "top", marginTop: 10 },
+                        size: { height: 35, width: "auto" },
+                        align: "center"
+                    },
+                    {
+                        id: "vigencia_dia_1",
+                        type: "text",
+                        content: "{{vigencia_dia_1}}",
+                        position: { type: "fixed", align: "left", marginLeft: 12, marginTop: 36 },
+                        typography: { fontSize: 8.4, color: "#ffffff" },
+                        align: "left"
+                    },
+                    {
+                        id: "vigencia_numero_1",
+                        type: "text",
+                        content: "{{vigencia_numero_1}}",
+                        position: { type: "fixed", align: "left", marginLeft: 10, marginTop: 44 },
+                        typography: { fontSize: 22.5, color: "#ffffff", bold: true },
+                        align: "left"
+                    },
+                    {
+                        id: "vigencia_mes_1",
+                        type: "text",
+                        content: "{{vigencia_mes_1}}",
+                        position: { type: "fixed", align: "left", marginLeft: 12, marginTop: 58 },
+                        typography: { fontSize: 7.0, color: "#ffffff" },
+                        align: "left"
+                    },
+                    {
+                        id: "vigencia_al",
+                        type: "text",
+                        content: "AL",
+                        position: { type: "fixed", align: "left", marginLeft: 45, marginTop: 52 },
+                        typography: { fontSize: 6.5, color: "#ffffff", bold: true },
+                        align: "left"
+                    },
+                    {
+                        id: "vigencia_dia_2",
+                        type: "text",
+                        content: "{{vigencia_dia_2}}",
+                        position: { type: "fixed", align: "left", marginLeft: 58, marginTop: 36 },
+                        typography: { fontSize: 8.4, color: "#ffffff" },
+                        align: "left"
+                    },
+                    {
+                        id: "vigencia_numero_2",
+                        type: "text",
+                        content: "{{vigencia_numero_2}}",
+                        position: { type: "fixed", align: "left", marginLeft: 60, marginTop: 44 },
+                        typography: { fontSize: 22.5, color: "#ffffff", bold: true },
+                        align: "left"
+                    },
+                    {
+                        id: "vigencia_mes_2",
+                        type: "text",
+                        content: "{{vigencia_mes_2}}",
+                        position: { type: "fixed", align: "left", marginLeft: 58, marginTop: 58 },
+                        typography: { fontSize: 7.0, color: "#ffffff" },
+                        align: "left"
+                    },
+                    {
+                        id: "logo_jumbo",
+                        type: "image",
+                        source: "imagenes/logo_jumbo.png",
+                        position: { type: "fixed", align: "right", marginRight: 5, marginTop: 5 },
+                        size: { height: 25, width: "auto" }
+                    }
+                ]
+            },
+            // OFERTA 1
+            {
+                id: "oferta_1",
+                type: "group",
+                position: "after:cabezal",
+                background: "#2e7d32",
+                padding: 8,
+                flex: 1,
+                elements: generarOferta("1")
+            },
+            // SEPARADOR
+            {
+                id: "separador",
+                type: "decorative",
+                position: "after:oferta_1",
+                height: 1,
+                background: "#ffffff"
+            },
+            // OFERTA 2
+            {
+                id: "oferta_2",
+                type: "group",
+                position: "after:separador",
+                background: "#2e7d32",
+                padding: 8,
+                flex: 1,
+                elements: generarOferta("2")
+            },
+            // LÍNEA SUPERIOR
+            {
+                id: "linea_superior",
+                type: "decorative",
+                position: "after:oferta_2",
+                height: 1,
+                background: "#ffffff",
+                marginTop: 3
+            },
+            // TEXTO INFORMATIVO
+            {
+                id: "texto_informativo",
+                type: "group",
+                position: "after:linea_superior",
+                padding: 4,
+                background: "transparent",
+                elements: [
+                    {
+                        id: "texto_informativo_contenido",
+                        type: "text",
+                        content: "ENCONTRÁ ESTAS Y OTRAS OFERTAS TAMBIÉN EN",
+                        typography: { fontSize: 5.5, color: "#ffffff", bold: true },
+                        align: "center"
+                    },
+                    {
+                        id: "imagen_acompanante",
+                        type: "image",
+                        source: "imagenes/group0.svg",
+                        position: { type: "relative", after: "texto_informativo_contenido", marginTop: 2 },
+                        size: { height: 13, width: "auto" },
+                        align: "center"
+                    },
+                    {
+                        id: "com_ar",
+                        type: "text",
+                        content: ".com.ar",
+                        position: { type: "relative", after: "imagen_acompanante", marginTop: 2 },
+                        typography: { fontSize: 4.0, color: "#ffffff", bold: true },
+                        align: "center"
+                    }
+                ]
+            },
+            // LÍNEA INFERIOR
+            {
+                id: "linea_inferior",
+                type: "decorative",
+                position: "after:texto_informativo",
+                height: 1,
+                background: "#ffffff",
+                marginBottom: 3
+            },
+            // LEGALES
+            {
+                id: "legales",
+                type: "text",
+                content: "{{legales}}",
+                position: "bottom",
+                padding: 4,
+                typography: { fontSize: 7, color: "#ffffff" },
+                align: "center",
+                maxLines: 2
+            }
+        ]
     }
+};
+
+// ============================================================
+// 3. MOTOR DE RENDERIZADO
+// ============================================================
+
+function renderizarBanner(datos, reglas) {
+    function reemplazarVariables(texto) {
+        if (!texto) return "";
+        let resultado = texto;
+        for (const [key, value] of Object.entries(datos)) {
+            resultado = resultado.replace(new RegExp(`{{${key}}}`, 'g'), value);
+        }
+        return resultado;
+    }
+
+    function renderizarElemento(el) {
+        let html = "";
+        const estiloBase = "display:flex; flex-direction:column; align-items:center; justify-content:center;";
+
+        if (el.type === "text") {
+            const contenido = reemplazarVariables(el.content || "");
+            const fontSize = el.typography?.fontSize || 14;
+            const color = el.typography?.color || "#000000";
+            const bold = el.typography?.bold ? "bold" : "normal";
+            const maxLines = el.maxLines || 0;
+            const align = el.align || "center";
+            const textShadow = el.textShadow || "none";
+
+            const estiloTexto = `
+                font-size: ${fontSize}px;
+                color: ${color};
+                font-weight: ${bold};
+                text-align: ${align};
+                ${maxLines > 0 ? `display: -webkit-box; -webkit-line-clamp: ${maxLines}; -webkit-box-orient: vertical; overflow: hidden;` : ''}
+                ${textShadow !== "none" ? `text-shadow: ${textShadow};` : ''}
+                padding: ${el.padding || 0}px;
+                width: 100%;
+            `;
+
+            html += `<div style="${estiloTexto}">${contenido}</div>`;
+        }
+
+        if (el.type === "image") {
+            const src = reemplazarVariables(el.source || "");
+            const height = el.size?.height || 30;
+            const width = el.size?.width || "auto";
+            html += `<img src="${src}" style="height:${height}px; width:${width};" alt="Imagen">`;
+        }
+
+        if (el.type === "decorative") {
+            const src = reemplazarVariables(el.source || "");
+            const width = el.size?.width || 70;
+            const height = el.size?.height || 55;
+            html += `<img src="${src}" style="width:${width}px; height:${height}px; z-index:${el.zIndex || 1};" alt="Decorativo">`;
+        }
+
+        if (el.type === "group" && el.elements) {
+            const padding = el.padding || 0;
+            const background = el.background || "transparent";
+            const flex = el.flex || 0;
+            const estiloGroup = `
+                ${estiloBase}
+                padding: ${padding}px;
+                background: ${background};
+                ${flex ? `flex: ${flex};` : ''}
+                ${el.height ? `height: ${el.height}px;` : ''}
+                ${el.width ? `width: ${el.width};` : ''}
+                gap: ${el.gap || 2}px;
+                width: 100%;
+            `;
+            let contenidoGroup = "";
+            for (const subEl of el.elements) {
+                contenidoGroup += renderizarElemento(subEl);
+            }
+            html += `<div style="${estiloGroup}">${contenidoGroup}</div>`;
+        }
+
+        return html;
+    }
+
+    const padding = reglas.layout?.padding || 0;
+    const gap = reglas.layout?.gap || 0;
+    const direction = reglas.layout?.type === "horizontal" ? "row" : "column";
+
+    let html = `
+        <div class="banner" style="
+            width: ${reglas.width}px;
+            height: ${reglas.height}px;
+            background: ${reglas.background || "#ffffff"};
+            display: flex;
+            flex-direction: ${direction};
+            padding: ${padding}px;
+            gap: ${gap}px;
+            overflow: hidden;
+            position: relative;
+        ">
+    `;
+
+    for (const el of reglas.elementos) {
+        html += renderizarElemento(el);
+    }
+
+    html += `</div>`;
+    return html;
+}
+
+// ============================================================
+// 4. GENERAR BANNERS
+// ============================================================
+
+function generarBanners() {
+    console.log("📢 La función generarBanners se ejecutó correctamente");
+
+    // Recoger datos del formulario
+    const datos = {
+        vigencia_dia_1: document.getElementById('vigencia_dia_1')?.value || "viernes",
+        vigencia_numero_1: document.getElementById('vigencia_numero_1')?.value || "19",
+        vigencia_mes_1: document.getElementById('vigencia_mes_1')?.value || "junio",
+        vigencia_dia_2: document.getElementById('vigencia_dia_2')?.value || "domingo",
+        vigencia_numero_2: document.getElementById('vigencia_numero_2')?.value || "21",
+        vigencia_mes_2: document.getElementById('vigencia_mes_2')?.value || "junio",
+        logo_oferta: document.getElementById('logoOferta')?.value || "imagenes/logo0.svg",
+        descuento_1: document.getElementById('descuento_1')?.value || "30%",
+        cencopay_1: document.getElementById('cencopay_1')?.value || "15%",
+        dinamica_1: document.getElementById('dinamica_1')?.value || "3x2",
+        productos_1: document.getElementById('productos_1')?.value || "VINOS Y ESPUMANTES*",
+        descuento_2: document.getElementById('descuento_2')?.value || "20%",
+        cencopay_2: document.getElementById('cencopay_2')?.value || "10%",
+        dinamica_2: document.getElementById('dinamica_2')?.value || "4x2",
+        productos_2: document.getElementById('productos_2')?.value || "LECHES SABORIZADAS*",
+        legales: document.getElementById('legales')?.value || "BEBER CON MODERACIÓN. PROHIBIDA LA VENTA DE BEBIDAS ALCOHÓLICAS A MENORES DE 18 AÑOS. VER EXCLUSIONES EN JUMBO.COM.AR"
+    };
+
+    console.log("📦 Datos recolectados:", datos);
+
+    // Determinar qué banners generar
+    const selector = document.getElementById('selectorBanner');
+    const seleccion = selector?.value || 'todas';
+
+    let bannersAGenerar = [];
+    if (seleccion === 'todas') {
+        bannersAGenerar = Object.values(banners);
+    } else {
+        bannersAGenerar = [banners[seleccion]];
+    }
+
+    console.log("🖼️ Banners a generar:", bannersAGenerar.length);
+
+    const contenedor = document.getElementById('contenedorBanners');
+    if (!contenedor) {
+        console.error("❌ No se encontró el contenedor de resultados");
+        return;
+    }
+    contenedor.innerHTML = '';
+
+    for (const banner of bannersAGenerar) {
+        console.log(`🎨 Generando: ${banner.nombre}`);
+        const html = renderizarBanner(datos, banner);
+
+        const div = document.createElement('div');
+        div.className = 'banner-item';
+        div.innerHTML = `
+            <div class="banner-header">
+                <strong>📐 ${banner.nombre}</strong>
+                <button onclick="descargarBanner('${banner.id}')">⬇️ Descargar JPG</button>
+            </div>
+            <div class="banner-preview" id="banner-${banner.id}">
+                ${html}
+            </div>
+            <hr>
+        `;
+        contenedor.appendChild(div);
+    }
+
+    const resultadosDiv = document.getElementById('resultados');
+    if (resultadosDiv) resultadosDiv.style.display = 'block';
     
-    .container {
-        padding: 15px;
+    const btnTodos = document.getElementById('btnDescargarTodos');
+    if (btnTodos) btnTodos.style.display = 'inline-block';
+
+    window.bannersGenerados = bannersAGenerar;
+    console.log("✅ ¡Banners generados con éxito!");
+}
+
+// ============================================================
+// 5. DESCARGAR
+// ============================================================
+
+function descargarBanner(id) {
+    const elemento = document.getElementById(`banner-${id}`);
+    if (!elemento) {
+        console.error(`❌ No se encontró el banner ${id}`);
+        return;
+    }
+
+    html2canvas(elemento, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: null
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `${id}.jpg`;
+        link.href = canvas.toDataURL('image/jpeg', 0.95);
+        link.click();
+    }).catch(error => {
+        console.error("❌ Error al generar la imagen:", error);
+    });
+}
+
+function descargarTodos() {
+    const bannersList = window.bannersGenerados || [];
+    if (bannersList.length === 0) {
+        alert('Primero genera los banners');
+        return;
+    }
+
+    for (let i = 0; i < bannersList.length; i++) {
+        setTimeout(() => {
+            descargarBanner(bannersList[i].id);
+        }, i * 500);
     }
 }
-.formulario {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
-}
 
-.grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
+// ============================================================
+// 6. INICIALIZAR EVENTOS
+// ============================================================
 
-.grid-3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 15px;
-}
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("🚀 DOM completamente cargado");
 
-.campo {
-    margin-bottom: 15px;
-}
-
-.campo label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #333;
-    font-size: 14px;
-}
-
-.campo input, .campo select {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
-.campo input:focus, .campo select:focus {
-    border-color: #2e7d32;
-    outline: none;
-}
-
-button {
-    background: #2e7d32;
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-button:hover {
-    background: #1b5e20;
-}
-
-#btnDescargarTodos {
-    background: #1565c0;
-    margin-top: 20px;
-}
-
-#btnDescargarTodos:hover {
-    background: #0d47a1;
-}
-
-#resultados {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 2px solid #eee;
-}
-
-.banner-item {
-    margin: 20px 0;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-}
-
-.banner-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.banner-header strong {
-    font-size: 18px;
-    color: #1a1a1a;
-}
-
-.banner-header button {
-    padding: 8px 20px;
-    font-size: 14px;
-    background: #2e7d32;
-}
-
-.banner-header button:hover {
-    background: #1b5e20;
-}
-
-.banner-preview {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: white;
-    padding: 20px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    overflow: auto;
-    min-height: 100px;
-}
-
-.banner {
-    flex-shrink: 0;
-    border: 1px solid #e0e0e0;
-}
-
-hr {
-    margin: 20px 0 10px 0;
-    border: none;
-    border-top: 2px solid #e0e0e0;
-}
-
-@media (max-width: 768px) {
-    .grid-2, .grid-3 {
-        grid-template-columns: 1fr;
+    const btnGenerar = document.getElementById('btnGenerar');
+    if (btnGenerar) {
+        btnGenerar.addEventListener('click', generarBanners);
+        console.log("✅ Botón 'Generar Banners' configurado");
+    } else {
+        console.error("❌ No se encontró el botón 'btnGenerar'");
     }
-    
-    .container {
-        padding: 15px;
+
+    const btnDescargarTodos = document.getElementById('btnDescargarTodos');
+    if (btnDescargarTodos) {
+        btnDescargarTodos.addEventListener('click', descargarTodos);
+        console.log("✅ Botón 'Descargar todos' configurado");
     }
-}
+
+    // Generar ejemplo al cargar
+    setTimeout(generarBanners, 500);
+});
