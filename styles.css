@@ -66,7 +66,8 @@ h3 {
     font-size: 14px;
 }
 
-.campo input, .campo select {
+.campo input,
+.campo select {
     width: 100%;
     padding: 10px;
     border: 2px solid #ddd;
@@ -74,7 +75,8 @@ h3 {
     font-size: 14px;
 }
 
-.campo input:focus, .campo select:focus {
+.campo input:focus,
+.campo select:focus {
     border-color: #2e7d32;
     outline: none;
 }
@@ -165,10 +167,11 @@ hr {
 }
 
 @media (max-width: 768px) {
-    .grid-2, .grid-3 {
+    .grid-2,
+    .grid-3 {
         grid-template-columns: 1fr;
     }
-    
+
     .container {
         padding: 15px;
     }
