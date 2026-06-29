@@ -348,7 +348,7 @@ function renderizarBanner(datos, reglas) {
     }
 
     const padding = reglas.layout?.padding || 0;
-    const gap = regras.layout?.gap || 0;
+    const gap = reglas.layout?.gap || 0;
     const direction = reglas.layout?.type === "horizontal" ? "row" : "column";
 
     let html = `
