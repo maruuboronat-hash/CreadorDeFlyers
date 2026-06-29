@@ -477,19 +477,15 @@ function descargarTodos() {
 // 6. INICIALIZAR
 // ============================================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("🚀 DOM listo");
-    
-    const btn = document.getElementById('btnGenerar');
-    if (btn) {
-        btn.addEventListener('click', generarBanners);
-        console.log("✅ Botón configurado");
-    }
+console.log("🚀 DOM listo");
 
-    const btnTodos = document.getElementById('btnDescargarTodos');
-    if (btnTodos) {
-        btnTodos.addEventListener('click', descargarTodos);
-    }
+// Configurar el botón de descarga masiva
+const btnTodos = document.getElementById('btnDescargarTodos');
+if (btnTodos) {
+    btnTodos.addEventListener('click', descargarTodos);
+    console.log("✅ Botón 'Descargar todos' configurado");
+}
 
-    setTimeout(generarBanners, 500);
+// Generar banners al cargar la página
+setTimeout(generarBanners, 500);
 });
